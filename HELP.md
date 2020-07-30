@@ -1,9 +1,9 @@
 # Getting Started
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## 日志记录
+* 通常采用拦截器对全局请求前及全局返回@ResponseBody注解下日志记录
+* 使用aop进行更加细粒度的 记录指定注解或指定方法 日志处理
+* 异常记录返回，采用全局日志拦截
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.3.1.RELEASE/maven-plugin/reference/html/#build-image)
+## 缓存
 

@@ -1,7 +1,9 @@
 package com.example.demo.util.http;
 
+import com.example.demo.annotation.IsSaveLog;
 import com.example.demo.config.InitConfig;
 import com.example.demo.util.LogUtil;
+import org.springframework.stereotype.Component;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
@@ -12,6 +14,7 @@ import java.net.*;
  * @author zxl
  * @date 2020/4/13 16:20
  */
+@Component
 public class HttpUtil {
 
     private final String reqType = "https";
@@ -42,6 +45,13 @@ public class HttpUtil {
      */
     public void setResult(String result) {
         this.result = result;
+    }
+
+    /**
+     * http默认注入属性
+     */
+    public HttpUtil(){
+
     }
 
     /**
@@ -82,7 +92,8 @@ public class HttpUtil {
      * @param data 请求参数
      * @return 返回请求结果
      */
-    public static String sendPost(String reqUrl,String data) {
+    @IsSaveLog(isSave = false)
+    public String sendPost(String reqUrl,String data) {
         try {
             // 连接超时时间，读超时时间（可自行判断，修改）
             HttpUtil hc = new HttpUtil(reqUrl);
@@ -199,7 +210,7 @@ public class HttpUtil {
      * @throws URISyntaxException
      * @throws IOException
      */
-    private String response(final HttpURLConnection connection, String encoding) throws URISyntaxException, IOException {
+    private String response(final HttpURLConnection connection, String encoding) throws IOException {
         InputStream in = null;
         StringBuffer sb = new StringBuffer();
         BufferedReader br = null;
@@ -233,7 +244,7 @@ public class HttpUtil {
      * @return 流字节数组
      * @throws IOException
      */
-    public static byte[] read(InputStream in) throws IOException {
+    private static byte[] read(InputStream in) throws IOException {
         byte[] buf = new byte[1024];
         int length = 0;
         ByteArrayOutputStream bout = new ByteArrayOutputStream();

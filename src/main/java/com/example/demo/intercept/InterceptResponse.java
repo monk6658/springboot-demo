@@ -8,7 +8,6 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-
 import java.lang.reflect.Method;
 
 /**
@@ -18,7 +17,6 @@ import java.lang.reflect.Method;
  */
 @ControllerAdvice
 public class InterceptResponse implements ResponseBodyAdvice<Object> {
-
 
     private String noMethod = "consumeIntegral";
 
@@ -31,9 +29,9 @@ public class InterceptResponse implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         Method method = returnType.getMethod();
-        String methodName = method.getName();
+
         //方法名为consumeIntegral的，不进行拦截
-        if(noMethod.equals(methodName)){
+        if(noMethod.equals(method.getName())){
             return false;
         }
         return true;

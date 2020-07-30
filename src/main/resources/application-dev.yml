@@ -28,3 +28,24 @@ mybatis:
   #  sql语句打印，生产删除
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+param:
+  redis:
+    tPosAdr:
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+      sel:
+
+    #微信异步 缓存
+    notify:
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+      sel: 3
+
+
+
+
+

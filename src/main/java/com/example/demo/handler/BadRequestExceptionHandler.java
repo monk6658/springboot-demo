@@ -2,12 +2,14 @@ package com.example.demo.handler;
 
 import com.example.demo.util.LogUtil;
 import com.example.demo.util.ResultUtil;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
@@ -63,6 +65,17 @@ public class BadRequestExceptionHandler {
             msgList.add(cvl.getMessageTemplate());
         }
         return ResultUtil.error(String.join(",",msgList));
+    }
+
+    /**
+     * 未找到前端页面映射
+     * @param ex 异常信息
+     * @return
+     */
+    @ExceptionHandler(value = HttpMessageNotWritableException.class)
+    public String httpMessageNotWritableExceptionHandler(HttpMessageNotWritableException ex) {
+        LogUtil.errInfoE("未找到对应页面",ex);
+        return ResultUtil.error("未找到对应页面");
     }
 
     /**
