@@ -3,9 +3,10 @@ package com.example.demo.intercept;
 import com.example.demo.annotation.IsSaveLog;
 import com.example.demo.util.LogUtil;
 import com.example.demo.util.RunningData;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author zxl
  * @date 2019-12-18 15:46
  */
-@ControllerAdvice
+@Component
 public class LogInterceptor implements HandlerInterceptor {
 
     @Override
