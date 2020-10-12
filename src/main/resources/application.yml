@@ -16,6 +16,10 @@ server:
 spring:
   profiles:
     active: @spring.profiles.active@ #获取运行的参数
+  boot:
+    admin:
+      client:
+        url: http://localhost:8091 # 指定服务端访问路径
 
 
 
@@ -53,4 +57,18 @@ param:
       max_idle: 10 # 连接池中的最大空闲连接
       min_idle: 5 # 连接池中的最小空闲连接
       max_wait_millis: 4 # 连接池最大阻塞等待时间
+
+
+#actuator 度量指标监控与健康检查配置
+management:
+  endpoints:
+    web:
+      # 访问名称
+      base-path: /actuator
+      exposure:
+        # 开放端口 [* 所有]、[单个开启：env,info]
+        include: "*"
+#        关闭指定功能，如上规则
+#        exclude:
+
 

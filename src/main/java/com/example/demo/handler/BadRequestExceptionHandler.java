@@ -19,6 +19,8 @@ import java.util.Set;
 
 /**
  * 统一错误校验处理
+ * ControllerAdvice：拦截controller所有视图跳转方法
+ * RestControllerAdvice：仅拦截controller中，带@ResponseBody注解的方法
  * @author zxl
  * @date 2019-12-18 15:15
  */

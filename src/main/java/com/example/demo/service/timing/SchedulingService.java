@@ -27,9 +27,9 @@ public class SchedulingService {
 
     @Scheduled(initialDelay = 2000,fixedDelay = 50000)
     private void testS(){
-        for (int i = 0; i < 50000; i++){
-            threadPoolTaskExecutor.execute(() -> getCache());
-        }
+//        for (int i = 0; i < 50000; i++){
+//            threadPoolTaskExecutor.execute(() -> getCache());
+//        }
     }
 
     /**
