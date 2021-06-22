@@ -11,7 +11,6 @@ public class RunningData {
 
     /*** 系统凭证号*/
     private static FastThreadLocal<String> serialNum = new FastThreadLocal<String>();
-
     /*** 请求方法名*/
     private static FastThreadLocal<String> reqMethod = new FastThreadLocal<String>();
 

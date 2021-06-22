@@ -1,5 +1,8 @@
 package com.example.demo.po;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -10,23 +13,13 @@ import javax.validation.constraints.NotBlank;
  * @author zxl
  * @date 2020/10/12 11:29
  */
+@Getter
+@Setter
 public class MyTest {
-
-    //使用配置文件ValidationMessages.properties的类型，该文件编码必须为ascii
-    @NotBlank(message = "{MyTest.id}")
-    private String id;
 
     //使用自定义
     @NotBlank(message = "实体类校验")
     private String name;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

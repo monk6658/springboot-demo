@@ -13,16 +13,13 @@ import javax.annotation.Resource;
 @Component
 public class CacheUtil {
 
-    @Resource(name = "tPosRedisTemplate")
+    @Resource
     private RedisTemplate redisTemplate;
 
-    private String getKey(String key,RedisTemplate redisTemplate){
-        return (String) redisTemplate.opsForValue().get(key);
+    private Object getKey(String key){
+        return redisTemplate.opsForValue().get(key);
     }
 
-    public String getTposKey(String key){
-        return getKey(key,redisTemplate);
-    }
 
 
 

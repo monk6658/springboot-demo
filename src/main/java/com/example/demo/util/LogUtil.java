@@ -31,7 +31,7 @@ public class LogUtil {
     public static void saveLog(JSONObject jsonObject,String type){
         StringBuffer logMsg = commonLog(type);
         for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-            logMsg.append("[" + entry.getKey() + "]：" + entry.getValue()).append(InitConfig.NEW_LINE);
+            logMsg.append("[").append(entry.getKey()).append("]：").append(entry.getValue()).append(InitConfig.NEW_LINE);
         }
         HTTP_NORMAL.info(logMsg.toString());
     }
@@ -47,7 +47,7 @@ public class LogUtil {
         if (null != temp) {
             while (temp.hasMoreElements()) {
                 String en = (String) temp.nextElement();
-                logMsg.append("[" + en + "]：" + request.getParameter(en)).append(InitConfig.NEW_LINE);
+                logMsg.append("[").append(en).append("]：").append(request.getParameter(en)).append(InitConfig.NEW_LINE);
             }
         }
         HTTP_NORMAL.info(logMsg.toString());
@@ -78,14 +78,6 @@ public class LogUtil {
         logMsg.append("[完整报文]：").append(InitConfig.NEW_LINE);
         return logMsg;
     }
-
-
-
-
-
-
-
-
 
     /**
      * 记录错误日志
@@ -138,17 +130,6 @@ public class LogUtil {
         SYS_ERROR.info(logMsg);
     }
 
-    /**
-     * 处理异常信息
-     * @param e
-     * @return
-     */
-    private static String changeExtInfo(Exception e) {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        e.printStackTrace(pw);
-        return sw.toString();
-    }
 
     /**
      * 处理异常信息
@@ -157,8 +138,11 @@ public class LogUtil {
      */
     private static String changeExtInfo(Throwable e) {
         StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        e.printStackTrace(pw);
+        try (PrintWriter pw = new PrintWriter(sw)) {
+            e.printStackTrace(pw);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
         return sw.toString();
     }
 

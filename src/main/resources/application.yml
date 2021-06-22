@@ -7,68 +7,54 @@ server:
     buffer-size: 1024 # 每块buffer的空间大小,越小的空间被利用越充分，不要设置太大，以免影响其他应用，合适即可
     direct-buffers: true # 是否分配的直接内存(NIO直接分配的堆外内存)
 
-  devtools:
-    restart:
-      enabled: true  #设置开启热部署
-      additional-paths: src/main/java #重启目录
 
 
 spring:
   profiles:
     active: @spring.profiles.active@ #获取运行的参数
-  boot:
-    admin:
-      client:
-        url: http://localhost:8091 # 指定服务端访问路径
 
+  # 热部署配置
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+      additional-paths: src/main/java #重启目录
 
+  # redis 配置
+  redis:
+    # 单机
+    host: 192.168.1.99
+    port: 6379
+
+#    # 哨兵
+#    sentinel:
+#      master: mymaster
+#      nodes: 192.168.1.99:26379,192.168.1.99:26380,192.168.1.99:26381  # 哨兵的IP:Port列表
+
+    password: 123456
+    timeout: 60000 #连接超时时间，单位毫秒，默认为0
+    lettuce: # 或 jedis
+      shutdown-timeout: 10000
+      pool:
+        max-active: 15
+        max-wait: 4
+        max-idle: 8
+        min-idle: 5
+    database: 0
 
 
 #加载log4j2 日志文件
 logging:
   config: classpath:log4j/log4j2-dev.xml
 
-
+# mybatis 配置
 mybatis:
   type-aliases-package: com.example.demo.po
   mapper-locations: classpath:com/example/demo/dao/*.xml
 
 
 
+sys-param:
+  path: classpath:config/param-dev.properties
 
-
-param:
-  # 异步线程参数
-  async:
-    #定时任务
-    task_scheduler:
-      pool_size: 20  # 定时任务线程数
-    #全局线程池
-    executor:
-      thread:
-        core_pool_size: 20    # 核心线程数
-        max_pool_size: 200    # 最大线程数
-        queue_capacity: 200    # 队列最大长度
-        keep_alive_seconds: 10000  # 线程池维护线程所允许的空闲时间
-        thread_name: defaultThreadPool_ # 线程名字
-  redis:
-    pool:
-      max_active: 50 # 连接池最大连接数（使用负值表示没有限制）
-      max_idle: 10 # 连接池中的最大空闲连接
-      min_idle: 5 # 连接池中的最小空闲连接
-      max_wait_millis: 4 # 连接池最大阻塞等待时间
-
-
-#actuator 度量指标监控与健康检查配置
-management:
-  endpoints:
-    web:
-      # 访问名称
-      base-path: /actuator
-      exposure:
-        # 开放端口 [* 所有]、[单个开启：env,info]
-        include: "*"
-#        关闭指定功能，如上规则
-#        exclude:
 
 
